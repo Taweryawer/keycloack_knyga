@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row justify-content-start my-5">
+    <a routerLink="addUser">Add new user</a>
+  </div>
+  <div class="row justify-content-center align-items-center">
+    <div class="table-responsive">
+      <table class="table table-dark">
+        <thead>
+        <tr>
+          <th scope="col">Login</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Age</th>
+          <th scope="col">Role</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.login}}</td>
+          <td>{{user.firstName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.email}}</td>
+          <td>{{getAgeForBirthday(user.birthday)}}</td>
+          <td>{{user.roleId}}</td>
+          <td>
+            <a class="btn btn-link p-0" routerLink="edit" [queryParams]="{ username: user.login }">Edit</a>
+            <button type="button"
+                    style="cursor: pointer"
+                    class="btn btn-link p-0 "
+                    data-toggle="modal"
+                    data-target="#removeModal"
+                    (click)="openRemoveModal(user.login)">Remove</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-admin-remove-user #removeModal [clickedUser]="clickedUser" (removed)="updateUserList($event)"></app-admin-remove-user>

@@ -1,0 +1,64 @@
+version: "3.8"
+services:
+  lokhmatov-migrations:
+    image: flyway/flyway:9.17
+    command: -connectRetries=60 -url=jdbc:postgresql://lokhmatov-database:5432/keycloak_knyga -user=postgres -password=postgres migrate
+    volumes:
+      - ./webservice/src/main/resources/db/migration:/flyway/sql
+      - ./data:/postgres
+      #      - ./data:/h2
+    depends_on:
+      - lokhmatov-database
+    links:
+      - lokhmatov-database
+  lokhmatov-database:
+    #    image: oscarfonts/h2:2.1.214
+    image: postgres:alpine
+    restart: always
+    environment:
+      POSTGRES_DB: keycloak_knyga
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      #    - ./data:/opt/h2-data
+    ports:
+      - 5433:5432
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5432/" ]
+      interval: 30s
+      start_period: 30s
+      timeout: 10s
+      retries: 5
+  lokhmatov-auth:
+    image: quay.io/keycloak/keycloak:15.1.1
+    volumes:
+      - ./keycloak_imports:/opt/jboss/keycloak/imports
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/keycloak.json
+      KEYCLOAK_FRONTEND_URL: http://localhost:8082/auth
+    ports:
+      - 8082:8080
+  lokhmatov-app:
+    image: "keycloakwebapp:${VERSION}"
+    build:
+      context: webservice
+    ports:
+      - 8081:8080
+    depends_on:
+      - lokhmatov-migrations
+      - lokhmatov-auth
+  lokhmatov-frontend:
+    image: "keycloakfrontend:${ANG_VERSION}"
+    build:
+      context: webservice/src/webapp/user-management
+    ports:
+      - 8080:80
+    depends_on:
+      - lokhmatov-app
+      - lokhmatov-auth
+
+
