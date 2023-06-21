@@ -1,0 +1,80 @@
+body {
+  background-color: #F5F5F5;
+  color: #333;
+}
+
+.container {
+  max-width: 960px;
+}
+
+/* Search Bar */
+.input-group {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.input-group .btn-outline-secondary {
+  color: #444;
+  border-color: #ddd;
+  background-color: #fff;
+}
+
+.input-group .btn-outline-secondary:hover {
+  background-color: #2e8b57;
+  border-color: #2e8b57;
+  color: #fff;
+}
+
+/* Book Cards */
+.card {
+  margin-top: 25px;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.card .card-body {
+  background-color: #2e8b57;
+  color: #fff;
+}
+
+.card .card-body .card-title {
+  margin-bottom: 0;
+}
+
+/* Pagination */
+.pagination .page-link {
+  color: #2e8b57;
+}
+
+.pagination .page-link:hover {
+  background-color: #2e8b57;
+  color: #fff;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; /* Adjust the height based on your design */
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3; /* Light gray border */
+  border-top: 4px solid #3498db; /* Blue border on top */
+  border-radius: 50%;
+  width: 30px; /* Adjust the size based on your design */
+  height: 30px; /* Adjust the size based on your design */
+  animation: spin 1s linear infinite; /* Animation properties */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

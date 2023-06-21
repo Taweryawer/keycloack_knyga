@@ -1,5 +1,46 @@
-<div class="container">
-  <div class="col-md">
-    <h1 class="text-center pt-5">Hello, {{getName()}}</h1>
+<div class="container mt-4">
+  <!-- Search Bar -->
+  <div class="input-group mb-3">
+    <input type="text" [(ngModel)]="searchInput" class="form-control" placeholder="Search books" aria-label="Book's name" aria-describedby="button-addon2">
+    <div class="input-group-append">
+      <a class="btn btn-outline-secondary" (click)="applySearch()" href="/1?search={{searchQuery}}" type="button" id="button-addon2">Search</a>
+    </div>
   </div>
+
+  <div *ngIf="!loading; else loadingTemplate">
+    <!-- ... -->
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p>Loading books...</p>
+    </div>
+  </ng-template>
+
+
+  <!-- Book Cards -->
+  <div *ngFor="let group of books; let i = index" class="row" >
+    <div *ngFor="let book of getGroupElements(books, i)" class="col-md-4">
+      <div class="card">
+        <img class="card-img-top" [src]=book.imageLink alt="Book 1">
+        <div class="card-body">
+          <h5 class="card-title">{{book.name}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Page navigation example" class="mt-4">
+    <ul class="pagination">
+      <li class="page-item" *ngIf="getCurrentPage() != 1"><a class="page-link" [href]="searchQuery != null ? (getCurrentPage() - 1) + '?search=' + searchQuery : (getCurrentPage() - 1)">Previous</a></li>
+      <li class="page-item" *ngFor="let item of [].constructor(getPageCount()); let i = index">
+        <a class="page-link" [href]="searchQuery != null ? '/' + (i + 1) + '?search=' + searchQuery : '/' + (i + 1)">{{i + 1}}</a>
+      </li>
+      <li class="page-item" *ngIf="getCurrentPage() != getPageCount()"><a class="page-link" [href]="searchQuery != null ? (getCurrentPage() + 1) + '?search=' + searchQuery : (getCurrentPage() + 1)">Next</a></li>
+    </ul>
+  </nav>
 </div>
