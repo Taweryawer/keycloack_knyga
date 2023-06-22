@@ -8,7 +8,17 @@
   </div>
 
   <div *ngIf="!loading; else loadingTemplate">
-    <!-- ... -->
+    <!-- Book Cards -->
+    <div *ngFor="let group of books; let i = index" class="row" >
+      <div *ngFor="let book of getGroupElements(books, i)" class="col-md-4">
+        <div class="card">
+          <img class="card-img-top" [src]=book.imageLink alt="Book 1">
+          <div class="card-body">
+            <h5 class="card-title">{{book.name}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <ng-template #loadingTemplate>
@@ -19,19 +29,6 @@
       <p>Loading books...</p>
     </div>
   </ng-template>
-
-
-  <!-- Book Cards -->
-  <div *ngFor="let group of books; let i = index" class="row" >
-    <div *ngFor="let book of getGroupElements(books, i)" class="col-md-4">
-      <div class="card">
-        <img class="card-img-top" [src]=book.imageLink alt="Book 1">
-        <div class="card-body">
-          <h5 class="card-title">{{book.name}}</h5>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Pagination -->
   <nav aria-label="Page navigation example" class="mt-4">
