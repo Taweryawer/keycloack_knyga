@@ -108,4 +108,9 @@ export class HttpClientService {
 
     return this.httpClient.get<BookResponse>(this.apiBooks, {params});
   }
+
+  getBook(id: number) {
+    const url = this.apiBooks + '/${id}';
+    return this.httpClient.get<Book>(url);
+  }
 }

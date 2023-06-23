@@ -16,6 +16,7 @@ import { AdminRemoveUserComponent } from './admin-remove-user/admin-remove-user.
 import {OAuthModule} from "angular-oauth2-oidc";
 import {LoginComponent} from "./login/login.component";
 import { FallbackComponent } from './fallback/fallback.component';
+import { BookPageComponent } from './book-page/book-page.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FallbackComponent } from './fallback/fallback.component';
     AdminEditUserComponent,
     AdminRemoveUserComponent,
     FallbackComponent,
+    BookPageComponent,
   ],
   imports: [
     BrowserModule,

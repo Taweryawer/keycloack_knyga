@@ -8,6 +8,7 @@ import {HomepageComponent} from "./homepage/homepage.component";
 import {AdminAddUserComponent} from "./admin-add-user/admin-add-user.component";
 import {AdminEditUserComponent} from "./admin-edit-user/admin-edit-user.component";
 import {UserGuard} from "./guards/user.guard";
+import {BookPageComponent} from "./book-page/book-page.component";
 
 const routes: Routes = [
   { path: 'admin', canActivateChild: [AuthGuard], children: [
@@ -18,6 +19,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/1', pathMatch: 'full' },
   { path: ':page', component: HomepageComponent },
+  { path: 'book', children: [
+      { path: ':id', component: BookPageComponent}
+    ]
+  },
   { path: '**', redirectTo: ''}
 ];
 
