@@ -110,7 +110,7 @@ export class HttpClientService {
   }
 
   getBook(id: number) {
-    const url = this.apiBooks + '/${id}';
+    const url = this.apiBooks + '/' + id;
     return this.httpClient.get<Book>(url);
   }
 }
