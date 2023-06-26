@@ -17,12 +17,13 @@ export class AppComponent {
 
   constructor(private oauthService: OAuthService, private authService: AuthService) {
     this.configure();
-    this.authService.initialLogin();
+    // this.authService.initialLogin();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
   authConfig: AuthConfig = {
     issuer: environment.keycloakAuth,
-    redirectUri: window.location.origin + '/',
+    redirectUri: window.location.origin + '/1',
     clientId: "angular-app",
     scope: "openid profile email",
     responseType: 'code',

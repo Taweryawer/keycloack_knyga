@@ -22,7 +22,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public BookHolderDto getAllBooks(@RequestParam(required = false) String name,
                                      @RequestParam(required = false, defaultValue = "1") int page,
                                      @RequestParam(required = false, defaultValue = "5") int pageSize,
