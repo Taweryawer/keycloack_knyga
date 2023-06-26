@@ -126,3 +126,5 @@ gradle-app.setting
 .DS_Store
 
 data/
+/webservice/src/webapp/user-management/.angular
+/webservice/src/webapp/user-management/package-lock.json

@@ -68,7 +68,7 @@ public class HibernateBookDao implements BookDao {
 
         cq.select(root);
         if (bookFilter.getName() != null) {
-            cq.where(criteriaBuilder.like(root.get("name"), "%" + bookFilter.getName() + "%"));
+            cq.where(criteriaBuilder.like(criteriaBuilder.upper(root.get("name")), "%" + bookFilter.getName().toUpperCase() + "%"));
         }
 
         String sortBy = bookFilter.getSortBy();

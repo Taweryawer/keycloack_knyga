@@ -38,10 +38,17 @@ public class KeycloakConfiguration extends
         http
             .authorizeRequests()
             .antMatchers("/api/users/**").hasRole("Admin")
-            .anyRequest().authenticated()
+            .antMatchers("/api/books/**").permitAll()
+                .anyRequest().authenticated()
             .and()
             .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and().cors()
+            .and()
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutSuccessUrl("/api/books")
             .and()
             .csrf().disable();
     }
