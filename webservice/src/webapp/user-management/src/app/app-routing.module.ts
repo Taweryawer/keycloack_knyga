@@ -16,9 +16,8 @@ const routes: Routes = [
     { path: 'edit', component: AdminEditUserComponent, canActivate: [AdminGuard]}
   ]},
   { path: 'login', component: LoginComponent },
-  { path: '', canActivateChild: [AuthGuard], children: [
-      { path: '', component: HomepageComponent, canActivate: [UserGuard]}
-  ]},
+  { path: '', redirectTo: '/1', pathMatch: 'full' },
+  { path: ':page', component: HomepageComponent },
   { path: '**', redirectTo: ''}
 ];
 

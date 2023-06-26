@@ -10,6 +10,7 @@ import {
 } from "../admin-add-user/admin-add-user.component";
 import {RemoveUserResponse} from "../admin-remove-user/admin-remove-user.component";
 import {environment} from "../../environments/environment";
+import {BookResponse} from "../homepage/homepage.component";
 
 export class User {
   constructor(
@@ -31,6 +32,22 @@ export class Role {
   }
 }
 
+export class Book {
+  constructor(
+    public id: number,
+    public name: string,
+    public author: string,
+    public genre: string,
+    public description: string,
+    public grade: number,
+    public releaseDate: string,
+    public imageLink: string
+  ) {
+  }
+}
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -43,6 +60,7 @@ export class HttpClientService {
   apiGet = environment.apiGetUser;
   apiEdit = environment.apiEditUser;
   apiRemove = environment.apiRemoveUser;
+  apiBooks = environment.apiBooks;
 
   constructor(
     private httpClient:HttpClient
@@ -53,11 +71,11 @@ export class HttpClientService {
   }
 
   getAllRoles() {
-    return this.httpClient.get<Role[]>(this.apiRoles)
+    return this.httpClient.get<Role[]>(this.apiRoles);
   }
 
   registerUser(user: RegisterForm) {
-    return this.httpClient.post<RegisterResponse>(this.apiRegister, user)
+    return this.httpClient.post<RegisterResponse>(this.apiRegister, user);
   }
 
   addUser(user: AdminUserForm) {
@@ -75,6 +93,19 @@ export class HttpClientService {
   }
 
   removeUser(user: string) {
-    return this.httpClient.post<RemoveUserResponse>(this.apiRemove, {username: user})
+    return this.httpClient.post<RemoveUserResponse>(this.apiRemove, {username: user});
+  }
+
+  getBooksPaginated(page: string, pageSize: number, name: string | null) {
+    const params: any = {
+      page,
+      pageSize
+    };
+
+    if (name) {
+      params.name = name;
+    }
+
+    return this.httpClient.get<BookResponse>(this.apiBooks, {params});
   }
 }
