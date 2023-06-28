@@ -16,7 +16,7 @@ a {
   background-color: #fff;
   border-radius: 5px;
   padding: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .input-group .btn-outline-secondary {
@@ -35,7 +35,7 @@ a {
 .card {
   margin-top: 25px;
   border: none;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .card img {
@@ -51,6 +51,12 @@ a {
 
 .card .card-body .card-title {
   margin-bottom: 0;
+}
+
+.card-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* Pagination */
@@ -80,6 +86,10 @@ a {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
