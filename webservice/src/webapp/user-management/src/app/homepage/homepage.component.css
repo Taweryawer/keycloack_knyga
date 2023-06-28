@@ -3,6 +3,10 @@ body {
   color: #333;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   max-width: 960px;
 }

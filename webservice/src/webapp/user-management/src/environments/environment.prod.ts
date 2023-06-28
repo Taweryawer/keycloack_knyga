@@ -9,5 +9,5 @@ export const environment = {
   apiEditUser: "http://localhost:8081/api/users/editUser",
   apiRemoveUser: "http://localhost:8081/api/users/removeUser",
   apiBooks: "http://localhost:8081/api/books",
-  keycloakAuth: "http://localhost:8082/auth/realms/SpringAngularTest"
+  keycloakAuth: "http://localhost:8082/auth/realms/Knygers"
 };
