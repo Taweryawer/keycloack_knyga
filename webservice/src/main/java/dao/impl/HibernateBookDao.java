@@ -91,7 +91,7 @@ public class HibernateBookDao implements BookDao {
 
         cq.select(criteriaBuilder.count(root));
         if (bookFilter.getName() != null) {
-            cq.where(criteriaBuilder.like(root.get("name"), "%" + bookFilter.getName() + "%"));
+            cq.where(criteriaBuilder.like(criteriaBuilder.upper(root.get("name")), "%" + bookFilter.getName().toUpperCase() + "%"));
         }
 
         return entityManager.createQuery(cq);
