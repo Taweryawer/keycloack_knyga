@@ -20,6 +20,8 @@ export class BookPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id')!);
+    console.log(this.route.snapshot.paramMap.get('id'));
+    console.log(this.id);
     this.httpClientService.getBook(this.id).subscribe(
       response => {
         this.handleResponse(response);

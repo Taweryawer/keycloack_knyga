@@ -96,7 +96,7 @@ export class HttpClientService {
     return this.httpClient.post<RemoveUserResponse>(this.apiRemove, {username: user});
   }
 
-  getBooksPaginated(page: string, pageSize: number, name: string | null) {
+  getBooksPaginated(page: string, pageSize: number, name: string | null, sort: string, asc: boolean) {
     const params: any = {
       page,
       pageSize
@@ -104,6 +104,11 @@ export class HttpClientService {
 
     if (name) {
       params.name = name;
+    }
+
+    if (sort && asc != null) {
+      params.sortBy = sort;
+      params.asc = asc;
     }
 
     return this.httpClient.get<BookResponse>(this.apiBooks, {params});

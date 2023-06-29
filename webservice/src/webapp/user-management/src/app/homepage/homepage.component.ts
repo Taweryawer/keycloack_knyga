@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Book, HttpClientService, User} from "../service/http-client.service";
 import {ActivatedRoute} from "@angular/router";
 
@@ -27,7 +27,7 @@ export class HomepageComponent implements OnInit {
   loading: boolean = false; // Flag to track loading state
 
   constructor(
-    private httpClientService: HttpClientService, private route: ActivatedRoute
+    private httpClientService: HttpClientService, private route: ActivatedRoute, private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class HomepageComponent implements OnInit {
       this.searchQuery = params.search;
     });
     this.page = this.route.snapshot.paramMap.get('page')!;
-    this.httpClientService.getBooksPaginated(this.page, 9, this.searchQuery).subscribe(
+    this.httpClientService.getBooksPaginated(this.page, 9, this.searchQuery, 'id', true).subscribe(
         response => {
           this.loading = false;
           this.handleResponse(response);
@@ -68,5 +68,18 @@ export class HomepageComponent implements OnInit {
 
   applySearch() {
     this.searchQuery = this.searchInput;
+  }
+
+  applySort(field: string, asc: boolean) {
+    this.httpClientService.getBooksPaginated(this.page!, 9, this.searchQuery, field, asc).subscribe(
+      response => {
+        this.loading = false;
+        this.handleResponse(response);
+        this.cdr.detectChanges();
+      },
+      error => {
+        this.loading = false;
+      }
+    );
   }
 }

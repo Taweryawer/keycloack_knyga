@@ -7,7 +7,25 @@
       <a class="btn btn-outline-secondary" (click)="applySearch()" href="/1?search={{searchQuery}}" type="button"
          id="button-addon2">Search</a>
     </div>
+    <div class="sort-options">
+      <button class="btn btn-outline-secondary"  type="button" data-bs-toggle="collapse" data-bs-target="#sortOptions"
+              aria-expanded="false" aria-controls="sortOptions">
+        Sort
+      </button>
+      <div class="collapse" id="sortOptions">
+
+        <h6>Sort By:</h6>
+        <ul class="list-unstyled">
+          <li><a data-bs-toggle="collapse" aria-controls="sortOptions" data-bs-target="#sortOptions" (click)="applySort('releaseDate',true)">Year ↑</a></li>
+          <li><a data-bs-toggle="collapse" aria-controls="sortOptions" data-bs-target="#sortOptions" (click)="applySort('releaseDate',false)">Year ↓</a></li>
+          <li><a data-bs-toggle="collapse" aria-controls="sortOptions" data-bs-target="#sortOptions" (click)="applySort('grade',true)">Rating ↑</a></li>
+          <li><a data-bs-toggle="collapse" aria-controls="sortOptions" data-bs-target="#sortOptions" (click)="applySort('grade',false)">Rating ↓</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
+
+  <!-- Sort Options -->
 
   <div *ngIf="!loading; else loadingTemplate">
     <!-- Book Cards -->
