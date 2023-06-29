@@ -23,7 +23,10 @@ export class HomepageComponent implements OnInit {
   page: string | null = '1';
   searchQuery: string | null = null;
 
-  searchInput : string | null = null;
+  sortBy: string = 'id';
+  asc: boolean = true;
+
+  searchInput: string | null = null;
   loading: boolean = false; // Flag to track loading state
 
   constructor(
@@ -34,9 +37,11 @@ export class HomepageComponent implements OnInit {
     this.loading = true;
     this.route.queryParams.subscribe(params => {
       this.searchQuery = params.search;
+      this.sortBy = params.sortBy;
+      this.asc = params.asc;
     });
     this.page = this.route.snapshot.paramMap.get('page')!;
-    this.httpClientService.getBooksPaginated(this.page, 9, this.searchQuery, 'id', true).subscribe(
+    this.httpClientService.getBooksPaginated(this.page, 9, this.searchQuery, this.sortBy, this.asc).subscribe(
         response => {
           this.loading = false;
           this.handleResponse(response);
@@ -71,6 +76,8 @@ export class HomepageComponent implements OnInit {
   }
 
   applySort(field: string, asc: boolean) {
+    this.sortBy = field;
+    this.asc = asc;
     this.httpClientService.getBooksPaginated(this.page!, 9, this.searchQuery, field, asc).subscribe(
       response => {
         this.loading = false;
