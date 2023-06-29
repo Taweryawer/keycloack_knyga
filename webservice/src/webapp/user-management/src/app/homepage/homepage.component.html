@@ -56,14 +56,14 @@
   <nav aria-label="Page navigation example" class="mt-4">
     <ul class="pagination">
       <li class="page-item" *ngIf="getCurrentPage() != 1"><a class="page-link"
-                                                             [href]="(searchQuery != null ? (getCurrentPage() - 1) + '?search=' + searchQuery : (getCurrentPage() - 1)) + '&sortBy=' + sortBy + '&asc=' + asc">Previous</a>
+                                                             [href]="'?sortBy=' + sortBy + '&asc=' + asc + (searchQuery != null ? (getCurrentPage() - 1) + '?search=' + searchQuery : (getCurrentPage() - 1))">Previous</a>
       </li>
       <li class="page-item" *ngFor="let item of [].constructor(getPageCount()); let i = index">
         <a class="page-link"
-           [href]="(searchQuery != null ? '/' + (i + 1) + '?search=' + searchQuery : '/' + (i + 1)) + '&sortBy=' + sortBy + '&asc=' + asc">{{i + 1}}</a>
+           [href]="'?sortBy=' + sortBy + '&asc=' + asc + (searchQuery != null ? '/' + (i + 1) + '&search=' + searchQuery : '/' + (i + 1))">{{i + 1}}</a>
       </li>
       <li class="page-item" *ngIf="getCurrentPage() != getPageCount()"><a class="page-link"
-                                                                          [href]="(searchQuery != null ? (getCurrentPage() + 1) + '?search=' + searchQuery : (getCurrentPage() + 1)) + '&sortBy=' + sortBy + '&asc=' + asc">Next</a>
+                                                                          [href]="'?sortBy=' + sortBy + '&asc=' + asc +(searchQuery != null ? (getCurrentPage() + 1) + '&search=' + searchQuery : (getCurrentPage() + 1))">Next</a>
       </li>
     </ul>
   </nav>
