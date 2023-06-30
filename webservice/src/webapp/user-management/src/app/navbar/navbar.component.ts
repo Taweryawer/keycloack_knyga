@@ -30,4 +30,8 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
+
+  redirectToUserProfile(): void {
+    window.location.href = '/auth/realms/Knygers/account/';
+  }
 }

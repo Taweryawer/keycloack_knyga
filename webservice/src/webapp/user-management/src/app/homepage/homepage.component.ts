@@ -37,8 +37,8 @@ export class HomepageComponent implements OnInit {
     this.loading = true;
     this.route.queryParams.subscribe(params => {
       this.searchQuery = params.search;
-      this.sortBy = params.sortBy;
-      this.asc = params.asc;
+      this.sortBy = params.sortBy ? params.sortBy : 'id';
+      this.asc = params.asc ? params.asc : true;
     });
     this.page = this.route.snapshot.paramMap.get('page')!;
     this.httpClientService.getBooksPaginated(this.page, 9, this.searchQuery, this.sortBy, this.asc).subscribe(

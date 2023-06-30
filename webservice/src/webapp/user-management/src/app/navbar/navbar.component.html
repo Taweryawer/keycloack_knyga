@@ -7,6 +7,7 @@
 
     <div class="navbar-right-items">
       <h3 *ngIf="isLoggedIn()" class="user-greeting">Hello, {{getUsername()}}</h3>
+      <a *ngIf="isLoggedIn()" href="http://localhost:8082/auth/realms/Knygers/account/ " class="nav-link logout-link">Profile</a>
       <a *ngIf="isLoggedIn()" (click)="logout()" class="nav-link logout-link">Logout</a>
       <a *ngIf="!isLoggedIn()" href="/login" class="nav-link logout-link">Login</a>
     </div>

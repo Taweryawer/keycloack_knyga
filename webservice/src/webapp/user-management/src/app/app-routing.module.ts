@@ -17,7 +17,7 @@ const routes: Routes = [
     { path: 'edit', component: AdminEditUserComponent, canActivate: [AdminGuard]}
   ]},
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/1', pathMatch: 'full' },
+  { path: '', redirectTo: '/1?sortBy=id&asc=true', pathMatch: 'full' },
   { path: ':page', component: HomepageComponent },
   { path: 'book', children: [
       { path: ':id', component: BookPageComponent}

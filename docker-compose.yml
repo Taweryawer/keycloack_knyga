@@ -35,9 +35,11 @@ services:
     image: quay.io/keycloak/keycloak:15.1.1
     volumes:
       - ./keycloak_imports:/opt/jboss/keycloak/imports
+      - ./keycloak_themes/knygers:/opt/jboss/keycloak/themes/knygers
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_DEFAULT_THEME: knygers
       KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/keycloak.json
       KEYCLOAK_FRONTEND_URL: http://localhost:8082/auth
     ports:
